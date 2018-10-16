@@ -1,5 +1,5 @@
 # cici
-宋词
+宋词展示的网站，练手的项目
 
 ## ci.db
 - 全宋词数据库，从已有的开源项目下载
@@ -13,3 +13,12 @@ https://raw.githubusercontent.com/chinese-poetry/chinese-poetry/master/ci/ci.db
 - database: sqlite
 - project managerment: maven 4
 - IDE: idea intelliJ 2017
+
+## todo
+- a simple page to show a ci, with id
+
+## finish
+- connect to sqlite by JDBC
+- ci entity, repository
+- author entity, repository
+- test the repository by junit
