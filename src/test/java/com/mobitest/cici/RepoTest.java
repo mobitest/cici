@@ -5,6 +5,12 @@
 
 package com.mobitest.cici;
 
+import com.mobitest.cici.entity.AuthorEntity;
+import com.mobitest.cici.entity.CiAuthorGroup;
+import com.mobitest.cici.entity.CiEntity;
+import com.mobitest.cici.entity.CiRhythmicGroup;
+import com.mobitest.cici.repo.AuthorRepositoryInterface;
+import com.mobitest.cici.repo.CiRepository;
 import lombok.extern.java.Log;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -12,17 +18,13 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import org.junit.jupiter.params.provider.ValueSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.util.List;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 //@ComponentScan(basePackages = "com.mobitest.cici")
@@ -66,6 +68,27 @@ public class RepoTest {
         List<AuthorEntity> authorEntities = authorRepository.findAuthorEntitiesByAuthorNameContains(author);
         assert authorEntities.size()>0;
         assert authorEntities.get(0).getAuthorName().contains(author);
+    }
+
+    @Test
+    @DisplayName(value = "作者和作品数")
+    public void shouldHasAuthor(){
+        List<CiAuthorGroup> authorCiCounts = ciRepository.findAuthors();
+        for(CiAuthorGroup c : authorCiCounts){
+            log.info(c.getAuthor().getAuthorName() + ":"+ c.getCiCount());
+        }
+        assertTrue(authorCiCounts.size()>0);
+    }
+
+    @Test
+    @DisplayName(value = "词牌和作品数")
+    public void shouldHasRhythmic(){
+        List<CiRhythmicGroup> rhythmicGroups = ciRepository.findRhymics();
+        for(CiRhythmicGroup cr : rhythmicGroups){
+            log.info(cr.getRhythmic() + ":"+cr.getCount());
+        }
+        log.info("total:"+rhythmicGroups.size());
+        assert rhythmicGroups.size()>0;
     }
 
 }
