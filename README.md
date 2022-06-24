@@ -22,3 +22,6 @@ https://raw.githubusercontent.com/chinese-poetry/chinese-poetry/master/ci/ci.db
 - ci entity, repository
 - author entity, repository
 - test the repository by junit
+
+
+cloud editor
